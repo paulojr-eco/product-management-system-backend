@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ExceptionsService } from './exceptions.service';
-import { IFormatExceptionMessage } from 'src/domain/exceptions/exceptions.interface';
+import { IFormatExceptionMessage } from 'src/main/exceptions/exceptions.interface';
 
 const mockErrorData = (codeError: number): IFormatExceptionMessage => ({
   message: 'any message',

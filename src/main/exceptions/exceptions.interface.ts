@@ -3,7 +3,7 @@ export interface IFormatExceptionMessage {
   code_error?: number;
 }
 
-export interface IException {
+export interface IExceptions {
   badRequestException(data: IFormatExceptionMessage): void;
   internalServerErrorException(data?: IFormatExceptionMessage): void;
   forbiddenException(data?: IFormatExceptionMessage): void;
