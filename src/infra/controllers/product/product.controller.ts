@@ -3,7 +3,7 @@ import { ApiExtraModels, ApiResponse } from '@nestjs/swagger';
 import { UseCaseProxy } from '../../usecases-proxy/usecases-proxy';
 import { UsecasesProxyModule } from '../../usecases-proxy/usecases-proxy.module';
 import { ProductPresenter } from './product.presenter';
-import { ApiResponseType } from 'src/infra/common/swagger/response.decorator';
+import { ApiResponseType } from '../../../infra/common/swagger/response.decorator';
 import { LoadProductsUseCase } from '../../../usecases/product/load-products.usecase';
 
 @Controller()
@@ -12,13 +12,13 @@ import { LoadProductsUseCase } from '../../../usecases/product/load-products.use
 export class ProductController {
   constructor(
     @Inject(UsecasesProxyModule.GET_PRODUCTS_USECASES_PROXY)
-    private readonly getAllTodoUsecaseProxy: UseCaseProxy<LoadProductsUseCase>,
+    private readonly getAllProductsUsecaseProxy: UseCaseProxy<LoadProductsUseCase>,
   ) {}
 
   @Get('products')
   @ApiResponseType(ProductPresenter, true)
-  async getTodos() {
-    const products = await this.getAllTodoUsecaseProxy.getInstance().load();
+  async getProducts() {
+    const products = await this.getAllProductsUsecaseProxy.getInstance().load();
     return products.map((product) => new ProductPresenter(product));
   }
 }

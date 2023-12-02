@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeOrmConfigModule } from 'src/main/config/typeorm-config/typeorm-config.module';
+import { TypeOrmConfigModule } from '../../main/config/typeorm-config/typeorm-config.module';
 import { Product } from '../entities/product.entity';
 import { DbProductRepository } from './product/product.repository';
 
