@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { EnvironmentConfigService } from '../environment-config/environment-config.service';
+import { EnvironmentConfigModule } from '../environment-config/environment-config.module';
 
 export const getTypeOrmModuleOptions = (
   config: EnvironmentConfigService,
@@ -12,14 +13,14 @@ export const getTypeOrmModuleOptions = (
     username: config.getDatabaseUser(),
     password: config.getDatabasePassword(),
     database: config.getDatabaseName(),
-    entities: [],
+    entities: [__dirname + './../../../infra/**/*.entity.{js,ts}'],
     synchronize: true,
   }) as TypeOrmModuleOptions;
 
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
-      imports: [EnvironmentConfigService],
+      imports: [EnvironmentConfigModule],
       inject: [EnvironmentConfigService],
       useFactory: getTypeOrmModuleOptions,
     }),
