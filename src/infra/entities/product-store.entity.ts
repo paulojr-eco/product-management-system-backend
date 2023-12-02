@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Product } from './product.entity';
+import { ColumnNumericTransformer } from '../../main/transformers/numeric-transformer';
 
 @Entity({ name: 'produtoloja' })
 export class ProductStore {
@@ -14,6 +15,12 @@ export class ProductStore {
   @Column()
   idLoja: number;
 
-  @Column({ type: 'decimal', precision: 13, scale: 3, nullable: true })
+  @Column({
+    type: 'numeric',
+    precision: 13,
+    scale: 3,
+    nullable: true,
+    transformer: new ColumnNumericTransformer(),
+  })
   precoVenda: number;
 }

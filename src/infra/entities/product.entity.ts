@@ -1,3 +1,4 @@
+import { ColumnNumericTransformer } from '../../main/transformers/numeric-transformer';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'produto' })
@@ -10,7 +11,13 @@ export class Product {
   })
   descricao: string;
 
-  @Column({ type: 'decimal', precision: 13, scale: 3, nullable: true })
+  @Column({
+    type: 'numeric',
+    precision: 13,
+    scale: 3,
+    nullable: true,
+    transformer: new ColumnNumericTransformer(),
+  })
   custo: number;
 
   @Column({ nullable: true })
