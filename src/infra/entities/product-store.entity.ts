@@ -14,6 +14,6 @@ export class ProductStore {
   @Column()
   idLoja: number;
 
-  @Column({ type: 'decimal', scale: 1, nullable: true })
+  @Column({ type: 'decimal', precision: 13, scale: 3, nullable: true })
   precoVenda: number;
 }

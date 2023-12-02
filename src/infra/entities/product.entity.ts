@@ -10,7 +10,7 @@ export class Product {
   })
   descricao: string;
 
-  @Column({ type: 'decimal', scale: 1, nullable: true })
+  @Column({ type: 'decimal', precision: 13, scale: 3, nullable: true })
   custo: number;
 
   @Column({ nullable: true })
