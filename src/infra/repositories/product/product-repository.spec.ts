@@ -2,22 +2,12 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DbProductRepository } from './product.repository';
 import { Product } from '../../../infra/entities/product.entity';
-import { Product as ProductModel } from '../../../domain/models/product';
 import { TypeOrmConfigModule } from '../../../main/config/typeorm-config/typeorm-config.module';
 import { appDataSource } from '../../../data/helpers/database-helper';
-
-const mockProduct = (): ProductModel => ({
-  id: 1,
-  description: 'any description',
-  cost: 99.9,
-  image: 'any image',
-});
-
-const mockUpdateProductData = (): Omit<ProductModel, 'id'> => ({
-  description: 'other description',
-  cost: 0.0,
-  image: 'other image',
-});
+import {
+  mockAddProductParams,
+  mockUpdateProductData,
+} from '../../../data/mocks/product.mocks';
 
 describe('DbProductRepository', () => {
   let repository: DbProductRepository;
@@ -25,6 +15,7 @@ describe('DbProductRepository', () => {
 
   beforeAll(async () => {
     await appDataSource.initialize();
+    await appDataSource.synchronize(true);
   });
 
   beforeEach(async () => {
@@ -46,10 +37,10 @@ describe('DbProductRepository', () => {
   });
 
   it('should call insert with correct values and return right product', async () => {
-    const { description, cost, image } = mockProduct();
+    const { description, cost, image } = mockAddProductParams();
     const insertSpy = jest.spyOn(repository, 'insert');
-    const product = await repository.insert({ description, cost, image });
-    expect(insertSpy).toHaveBeenLastCalledWith({ description, cost, image });
+    const product = await repository.insert(mockAddProductParams());
+    expect(insertSpy).toHaveBeenLastCalledWith(mockAddProductParams());
     expect(product.id).toEqual(1);
     expect(product.description).toEqual(description);
     expect(product.cost).toBe(cost);
@@ -57,8 +48,8 @@ describe('DbProductRepository', () => {
   });
 
   it('should find all products with correct values', async () => {
-    const { description, cost, image } = mockProduct();
-    await repository.insert({ description, cost, image });
+    const { description, cost, image } = mockAddProductParams();
+    await repository.insert(mockAddProductParams());
     const products = await repository.findAll();
     expect(products[0].id).toEqual(1);
     expect(products[0].description).toEqual(description);
@@ -67,13 +58,9 @@ describe('DbProductRepository', () => {
   });
 
   it('should call findById with correct values and return right product', async () => {
-    const { description, cost, image } = mockProduct();
+    const { description, cost, image } = mockAddProductParams();
     const findByIdSpy = jest.spyOn(repository, 'findById');
-    const insertedProduct = await repository.insert({
-      description,
-      cost,
-      image,
-    });
+    const insertedProduct = await repository.insert(mockAddProductParams());
     const product = await repository.findById(insertedProduct.id);
     expect(findByIdSpy).toHaveBeenCalledWith(insertedProduct.id);
     expect(product.id).toEqual(1);
@@ -83,13 +70,8 @@ describe('DbProductRepository', () => {
   });
 
   it('should call update with correct values and return right product', async () => {
-    const { description, cost, image } = mockProduct();
     const updateSpy = jest.spyOn(repository, 'update');
-    const insertedProduct = await repository.insert({
-      description,
-      cost,
-      image,
-    });
+    const insertedProduct = await repository.insert(mockAddProductParams());
     const newProductData = mockUpdateProductData();
     const product = await repository.update({
       id: insertedProduct.id,
@@ -106,13 +88,8 @@ describe('DbProductRepository', () => {
   });
 
   it('should call deleteById with correct values and return empty array', async () => {
-    const { description, cost, image } = mockProduct();
     const deleteByIdSpy = jest.spyOn(repository, 'deleteById');
-    const insertedProduct = await repository.insert({
-      description,
-      cost,
-      image,
-    });
+    const insertedProduct = await repository.insert(mockAddProductParams());
     await repository.deleteById(insertedProduct.id);
     const products = await appDataSource.getRepository(Product).find();
     expect(deleteByIdSpy).toHaveBeenCalledWith(insertedProduct.id);
