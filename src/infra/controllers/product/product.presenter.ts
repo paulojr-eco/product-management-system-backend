@@ -9,7 +9,7 @@ export class ProductPresenter {
   @ApiProperty()
   cost: number;
   @ApiProperty()
-  image: string;
+  image: Buffer;
 
   constructor(product: Product) {
     this.id = product.id;

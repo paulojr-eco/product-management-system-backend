@@ -1,5 +1,6 @@
 import { ColumnNumericTransformer } from '../../main/transformers/numeric-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ProductStore } from './product-store.entity';
 
 @Entity({ name: 'produto' })
 export class Product {
@@ -20,6 +21,9 @@ export class Product {
   })
   custo: number;
 
-  @Column({ nullable: true })
-  imagem: string;
+  @Column({ type: 'bytea', nullable: true })
+  imagem: Buffer;
+
+  @OneToMany(() => ProductStore, (produtoLoja) => produtoLoja.produto)
+  produtoLojas: ProductStore[];
 }
