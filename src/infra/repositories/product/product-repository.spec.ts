@@ -29,23 +29,23 @@ describe('DbProductRepository', () => {
   });
 
   it('should call insert with correct values and return right product', async () => {
-    const { description, cost, image } = mockAddProductParams();
+    const { descricao, custo, imagem } = mockAddProductParams();
     const insertSpy = jest.spyOn(repository, 'insert');
     const product = await repository.insert(mockAddProductParams());
     expect(insertSpy).toHaveBeenLastCalledWith(mockAddProductParams());
     expect(product.id).toBeDefined();
-    expect(product.descricao).toEqual(description);
-    expect(product.custo).toBe(cost);
-    expect(product.imagem).toEqual(image);
+    expect(product.descricao).toEqual(descricao);
+    expect(product.custo).toBe(custo);
+    expect(product.imagem).toEqual(imagem);
   });
 
   it('should find all products with correct values', async () => {
-    const { description, cost, image } = mockAddProductParams();
+    const { descricao, custo, imagem } = mockAddProductParams();
     await repository.insert(mockAddProductParams());
     const products = await repository.findAll();
     expect(products[0].id).toBeDefined();
-    expect(products[0].descricao).toEqual(description);
-    expect(products[0].custo).toBe(cost);
-    expect(products[0].imagem).toEqual(image);
+    expect(products[0].descricao).toEqual(descricao);
+    expect(products[0].custo).toBe(custo);
+    expect(products[0].imagem).toEqual(imagem);
   });
 });

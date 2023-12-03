@@ -1,4 +1,4 @@
-import { Product } from '../../../domain/models/product';
+import { Product } from '../../../infra/entities/product.entity';
 
 export interface ILoadProducts {
   load: () => Promise<Product[]>;
