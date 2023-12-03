@@ -1,9 +1,7 @@
-import { Product } from 'src/domain/models/product';
+import { Product } from 'src/infra/entities/product.entity';
+import { AddProductParams } from 'src/domain/usecases/product/add-product';
 
 export interface ProductRepository {
-  insert(product: Product): Promise<Product>;
+  insert(product: AddProductParams): Promise<Product>;
   findAll(): Promise<Product[]>;
-  findById(id: number): Promise<Product>;
-  update(product: Product): Promise<Product>;
-  deleteById(id: number): Promise<void>;
 }
