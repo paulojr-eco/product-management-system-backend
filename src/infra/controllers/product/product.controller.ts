@@ -20,7 +20,7 @@ export class ProductController {
   ) {}
 
   @Get('products')
-  @ApiResponseType(ProductPresenter, true)
+  @ApiResponseType(ProductPresenter)
   async getProducts() {
     const products = await this.getAllProductsUsecaseProxy.getInstance().load();
     return products.map((product) => new ProductPresenter(product));

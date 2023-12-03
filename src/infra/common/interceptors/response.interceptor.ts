@@ -10,8 +10,6 @@ import { map } from 'rxjs/operators';
 
 export class ResponseFormat<T> {
   @ApiProperty()
-  isArray: boolean;
-  @ApiProperty()
   path: string;
   @ApiProperty()
   duration: string;
@@ -36,7 +34,6 @@ export class ResponseInterceptor<T>
     return next.handle().pipe(
       map((data) => ({
         data,
-        isArray: Array.isArray(data),
         path: request.path,
         duration: `${Date.now() - now}ms`,
         method: request.method,

@@ -41,7 +41,6 @@ describe('ResponseInterceptor', () => {
     const response = await request(app.getHttpServer()).get('/test');
     const responseBody: ResponseFormat<MockData> = response.body;
     expect(response.status).toBe(200);
-    expect(responseBody.isArray).toBe(false);
     expect(responseBody.path).toBe('/test');
     expect(responseBody.duration).toMatch(/^\d+ms$/);
     expect(responseBody.method).toBe('GET');
