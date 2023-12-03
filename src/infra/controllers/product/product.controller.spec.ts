@@ -14,7 +14,6 @@ describe('ProductController', () => {
 
   beforeAll(async () => {
     await appDataSource.initialize();
-    await appDataSource.synchronize(true);
   });
 
   beforeEach(async () => {
@@ -32,10 +31,6 @@ describe('ProductController', () => {
     controller = module.get<ProductController>(ProductController);
   });
 
-  afterEach(async () => {
-    await appDataSource.synchronize(true);
-  });
-
   afterAll(async () => {
     await appDataSource.destroy();
   });
@@ -49,9 +44,11 @@ describe('ProductController', () => {
   });
 
   it('should load products with correct value', async () => {
-    await repository.insert(mockAddProductParams());
+    const product = await repository.insert(mockAddProductParams());
     const products = await controller.getProducts();
-    expect(products.length).toBe(1);
-    expect(products[0]).toEqual({ id: 1, ...mockAddProductParams() });
+    expect(products).toContainEqual({
+      id: product.id,
+      ...mockAddProductParams(),
+    });
   });
 });

@@ -1,7 +1,7 @@
-import { AddProductStoreParams } from 'src/domain/usecases/product/add-product';
-import { ProductStore } from 'src/infra/entities/product-store.entity';
-import { Product } from 'src/infra/entities/product.entity';
-import { Store } from 'src/infra/entities/store.entity';
+import { AddProductStoreParams } from '../../../domain/usecases/product/add-product';
+import { ProductStore } from '../../../infra/entities/product-store.entity';
+import { Product } from '../../../infra/entities/product.entity';
+import { Store } from '../../../infra/entities/store.entity';
 
 export function toProductStoreEntity(
   productStore: AddProductStoreParams,

@@ -5,7 +5,7 @@ import { RepositoriesModule } from '../repositories/repositories.module';
 import { DbProductRepository } from '../repositories/product/product.repository';
 import { UseCaseProxy } from './usecases-proxy';
 import { LoadProductsUseCase } from '../../usecases/product/load-products.usecase';
-import { AddProductsUseCase } from 'src/usecases/product/add-products.usecase';
+import { AddProductsUseCase } from '../../usecases/product/add-products.usecase';
 import { DbProductStoreRepository } from '../repositories/product-store/product-store.repository';
 import { DbStoreRepository } from '../repositories/store/store.repository';
 

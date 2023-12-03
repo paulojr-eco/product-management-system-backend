@@ -12,7 +12,6 @@ describe('DbProductRepository', () => {
 
   beforeAll(async () => {
     await appDataSource.initialize();
-    await appDataSource.synchronize(true);
   });
 
   beforeEach(async () => {
@@ -22,10 +21,6 @@ describe('DbProductRepository', () => {
     }).compile();
 
     repository = module.get<DbProductRepository>(DbProductRepository);
-  });
-
-  afterEach(async () => {
-    await appDataSource.synchronize(true);
   });
 
   afterAll(async () => {
@@ -48,7 +43,6 @@ describe('DbProductRepository', () => {
     const { description, cost, image } = mockAddProductParams();
     await repository.insert(mockAddProductParams());
     const products = await repository.findAll();
-    console.log('products: ', products);
     expect(products[0].id).toBeDefined();
     expect(products[0].descricao).toEqual(description);
     expect(products[0].custo).toBe(cost);
