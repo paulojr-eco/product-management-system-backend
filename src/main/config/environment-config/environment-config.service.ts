@@ -15,7 +15,9 @@ export class EnvironmentConfigService implements IDatabaseConfig {
   }
 
   getDatabasePort(): number {
-    return this.configService.get<number>('DATABASE_PORT');
+    return this.configService.get<number>(
+      process.env.NODE_ENV === 'test' ? 'DATABASE_PORT_TEST' : 'DATABASE_PORT',
+    );
   }
 
   getDatabaseUser(): string {
@@ -27,6 +29,8 @@ export class EnvironmentConfigService implements IDatabaseConfig {
   }
 
   getDatabaseName(): string {
-    return this.configService.get<string>('DATABASE_NAME');
+    return this.configService.get<string>(
+      process.env.NODE_ENV === 'test' ? 'DATABASE_NAME_TEST' : 'DATABASE_NAME',
+    );
   }
 }
