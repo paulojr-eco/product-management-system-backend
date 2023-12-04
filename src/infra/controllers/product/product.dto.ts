@@ -1,15 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  ValidateNested,
-} from 'class-validator';
+import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator';
 import {
   AddProductParams,
   AddProductStoreParams,
 } from '../../../domain/usecases/product/add-product';
 import { Type } from 'class-transformer';
+import { Product } from '../../../domain/models/product';
+
+class ProductClass {
+  id: number;
+  descricao: string;
+  custo?: number;
+  imagem?: Buffer;
+}
 
 class AddProductStoreClass {
   idLoja: number;
@@ -18,8 +21,9 @@ class AddProductStoreClass {
 export class UpdateProductDto {
   @ApiProperty({ required: true })
   @IsNotEmpty()
-  @IsNumber()
-  readonly id: number;
+  @ValidateNested({ each: true })
+  @Type(() => ProductClass)
+  readonly product: Product;
 }
 
 export class AddProductDto {
