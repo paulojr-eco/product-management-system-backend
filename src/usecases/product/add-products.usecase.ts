@@ -6,6 +6,7 @@ import {
   AddProductStoreParams,
   IAddProduct,
 } from 'src/domain/usecases/product/add-product';
+import { HttpException } from '@nestjs/common';
 
 export class AddProductsUseCase implements IAddProduct {
   constructor(
@@ -16,23 +17,28 @@ export class AddProductsUseCase implements IAddProduct {
 
   async add(
     product: AddProductParams,
-    productsStore?: AddProductStoreParams[],
+    productsStore: AddProductStoreParams[],
   ): Promise<void> {
-    if (productsStore) {
-      productsStore.forEach(async (productStore) => {
-        await this.storeRepository.findById(productStore.idLoja);
-      });
-    }
+    if (this.hasRepeatedStore(productsStore))
+      throw new HttpException(
+        'Não pode haver mais de um cadastro para a mesma loja',
+        400,
+      );
+    productsStore.forEach(async (productStore) => {
+      await this.storeRepository.findById(productStore.idLoja);
+    });
     const insertedProduct = await this.productRepository.insert(product);
-    if (productsStore) {
-      productsStore.forEach(async (productStore) => {
-        const store = await this.storeRepository.findById(productStore.idLoja);
-        this.productStoreRepository.insert(
-          productStore,
-          store,
-          insertedProduct,
-        );
-      });
-    }
+    productsStore.forEach(async (productStore) => {
+      const store = await this.storeRepository.findById(productStore.idLoja);
+      this.productStoreRepository.insert(productStore, store, insertedProduct);
+    });
+  }
+
+  hasRepeatedStore(productsStore: AddProductStoreParams[]) {
+    const stores = productsStore.map((productStore) => productStore.idLoja);
+    const repeatedStores = stores.filter(
+      (store, index) => stores.indexOf(store) !== index,
+    );
+    return repeatedStores.length > 0;
   }
 }

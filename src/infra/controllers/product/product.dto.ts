@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, ValidateNested } from 'class-validator';
+import { IsNotEmpty, ValidateNested } from 'class-validator';
 import {
   AddProductParams,
   AddProductStoreParams,
@@ -31,7 +31,8 @@ export class AddProductDto {
   @IsNotEmpty()
   readonly productParams: AddProductParams;
 
-  @IsOptional()
+  @ApiProperty({ required: true })
+  @IsNotEmpty()
   @ValidateNested({ each: true })
   @Type(() => AddProductStoreClass)
   readonly productStoreParams: AddProductStoreParams[];
