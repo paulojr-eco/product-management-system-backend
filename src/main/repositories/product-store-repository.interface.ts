@@ -9,4 +9,5 @@ export interface ProductStoreRepository {
     store: Store,
     product: Product,
   ): Promise<ProductStore>;
+  delete(id: number): Promise<void>;
 }

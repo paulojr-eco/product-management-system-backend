@@ -12,6 +12,7 @@ import { DeleteProductUseCase } from 'src/usecases/product/delete-product.usecas
 import { LoadProductByIdUseCase } from 'src/usecases/product/load-product-by-id.usecase';
 import { UpdateProductUseCase } from 'src/usecases/product/update-products.usecase';
 import { AddProductStoreUseCase } from 'src/usecases/product-store/add-product-store.usecase';
+import { DeleteProductStoreUseCase } from 'src/usecases/product-store/delete-product-store.usecase';
 
 @Module({
   imports: [LoggerModule, RepositoriesModule, ExceptionsModule],
@@ -23,6 +24,8 @@ export class UsecasesProxyModule {
   static LOAD_BY_ID_PRODUCT_USECASES_PROXY = 'loadProductByIdUsecasesProxy';
   static UPDATE_PRODUCT_USECASES_PROXY = 'updateProductUsecasesProxy';
   static ADD_PRODUCT_STORE_USECASES_PROXY = 'addProductStoreUsecasesProxy';
+  static DELETE_PRODUCT_STORE_USECASES_PROXY =
+    'deleteProductStoreUsecasesProxy';
 
   static register(): DynamicModule {
     return {
@@ -92,6 +95,14 @@ export class UsecasesProxyModule {
               ),
             ),
         },
+        {
+          inject: [DbProductStoreRepository],
+          provide: UsecasesProxyModule.DELETE_PRODUCT_STORE_USECASES_PROXY,
+          useFactory: (ProductStoreRepository: DbProductStoreRepository) =>
+            new UseCaseProxy(
+              new DeleteProductStoreUseCase(ProductStoreRepository),
+            ),
+        },
       ],
       exports: [
         UsecasesProxyModule.GET_PRODUCTS_USECASES_PROXY,
@@ -100,6 +111,7 @@ export class UsecasesProxyModule {
         UsecasesProxyModule.LOAD_BY_ID_PRODUCT_USECASES_PROXY,
         UsecasesProxyModule.UPDATE_PRODUCT_USECASES_PROXY,
         UsecasesProxyModule.ADD_PRODUCT_STORE_USECASES_PROXY,
+        UsecasesProxyModule.DELETE_PRODUCT_STORE_USECASES_PROXY,
       ],
     };
   }

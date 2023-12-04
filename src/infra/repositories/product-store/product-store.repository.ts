@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from '../../../infra/entities/product.entity';
@@ -26,5 +26,15 @@ export class DbProductStoreRepository implements ProductStoreRepository {
       product,
     );
     return await this.productStoreRepository.save(productStoreEntity);
+  }
+
+  async delete(id: number): Promise<void> {
+    const productStore = await this.productStoreRepository.findOne({
+      where: { id: id },
+    });
+    if (!productStore) {
+      throw new HttpException('Relação de produto e loja não encontrado', 400);
+    }
+    await this.productStoreRepository.delete({ id });
   }
 }
