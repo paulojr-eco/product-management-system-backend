@@ -24,4 +24,22 @@ export class DbProductRepository implements ProductRepository {
       .leftJoinAndSelect('produto.produtoLojas', 'produtoLoja')
       .getMany();
   }
+
+  async delete(id: number): Promise<void> {
+    await this.productRepository.findOneOrFail({
+      where: { id: id },
+    });
+    await this.productRepository.delete(id);
+  }
+
+  async loadById(id: number): Promise<Product> {
+    await this.productRepository.findOneOrFail({
+      where: { id: id },
+    });
+    return await this.productRepository
+      .createQueryBuilder('produto')
+      .leftJoinAndSelect('produto.produtoLojas', 'produtoLoja')
+      .where('produto.id = :id', { id })
+      .getOne();
+  }
 }
