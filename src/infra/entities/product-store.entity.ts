@@ -24,6 +24,12 @@ export class ProductStore {
   @JoinColumn({ name: 'idLoja' })
   loja: Store;
 
+  @Column()
+  idProduto: number;
+
+  @Column()
+  idLoja: number;
+
   @Column({
     type: 'numeric',
     precision: 13,
