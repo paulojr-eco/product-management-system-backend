@@ -7,6 +7,7 @@ import { ProductStoreRepository } from '../../../main/repositories/product-store
 import { AddProductStoreParams } from 'src/domain/usecases/product/add-product';
 import { Store } from 'src/infra/entities/store.entity';
 import { toProductStoreEntity } from './product-store.transformer';
+import { ProductStore as ProductStoreModel } from 'src/domain/models/product-store';
 
 @Injectable()
 export class DbProductStoreRepository implements ProductStoreRepository {
@@ -36,5 +37,15 @@ export class DbProductStoreRepository implements ProductStoreRepository {
       throw new HttpException('Relação de produto e loja não encontrado', 400);
     }
     await this.productStoreRepository.delete({ id });
+  }
+
+  async update(productStore: ProductStoreModel) {
+    const dbProductStore = await this.productStoreRepository.findOne({
+      where: { id: productStore.id },
+    });
+    if (!dbProductStore) {
+      throw new HttpException('Relação de produto e loja não encontrado', 400);
+    }
+    await this.productStoreRepository.update(productStore.id, productStore);
   }
 }
