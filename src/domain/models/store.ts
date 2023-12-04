@@ -1,4 +1,4 @@
 export type Store = {
   id: number;
-  description: string;
+  descricao: string;
 };

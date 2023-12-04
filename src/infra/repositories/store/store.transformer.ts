@@ -4,7 +4,7 @@ import { Store as StoreEntity } from 'src/infra/entities/store.entity';
 export function toStoreModel(storeEntity: StoreEntity): StoreModel {
   const store: StoreModel = {
     id: storeEntity.id,
-    description: storeEntity.descricao,
+    descricao: storeEntity.descricao,
   };
   return store;
 }

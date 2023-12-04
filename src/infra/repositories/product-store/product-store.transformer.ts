@@ -11,6 +11,6 @@ export function toProductStoreEntity(
   const productStoreEntity: ProductStore = new ProductStore();
   productStoreEntity.produto = product;
   productStoreEntity.loja = store;
-  productStoreEntity.precoVenda = productStore.saleCost;
+  productStoreEntity.precoVenda = productStore.precoVenda;
   return productStoreEntity;
 }
