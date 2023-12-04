@@ -14,11 +14,13 @@ export class ProductStore {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Product, (produto) => produto.produtoLojas)
+  @ManyToOne(() => Product, (produto) => produto.produtoLojas, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'idProduto' })
   produto: Product;
 
-  @ManyToOne(() => Store, (loja) => loja.produtosLoja)
+  @ManyToOne(() => Store, (loja) => loja.produtosLoja, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'idLoja' })
   loja: Store;
 
