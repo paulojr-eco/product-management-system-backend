@@ -16,10 +16,24 @@ export class AddProductsUseCase implements IAddProduct {
 
   async add(
     product: AddProductParams,
-    productStore?: AddProductStoreParams,
+    productsStore?: AddProductStoreParams[],
   ): Promise<void> {
-    const store = await this.storeRepository.findById(productStore.idStore);
+    if (productsStore) {
+      productsStore.forEach(async (productStore) => {
+        await this.storeRepository.findById(productStore.idLoja);
+      });
+    }
+
     const insertedProduct = await this.productRepository.insert(product);
-    this.productStoreRepository.insert(productStore, store, insertedProduct);
+    if (productsStore) {
+      productsStore.forEach(async (productStore) => {
+        const store = await this.storeRepository.findById(productStore.idLoja);
+        this.productStoreRepository.insert(
+          productStore,
+          store,
+          insertedProduct,
+        );
+      });
+    }
   }
 }

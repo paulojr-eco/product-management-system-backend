@@ -7,6 +7,6 @@ export type AddProductStoreParams = Omit<ProductStore, 'id' | 'idProduct'>;
 export interface IAddProduct {
   add: (
     product: AddProductParams,
-    productStore?: AddProductStoreParams,
+    productsStore?: AddProductStoreParams[],
   ) => Promise<void>;
 }
