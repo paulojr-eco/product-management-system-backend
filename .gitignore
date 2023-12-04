@@ -35,5 +35,6 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 .data
+.data-test
 .pnpm-store
 .env
