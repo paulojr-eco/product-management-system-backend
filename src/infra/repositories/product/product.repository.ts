@@ -33,7 +33,7 @@ export class DbProductRepository implements ProductRepository {
     await this.productRepository.delete(id);
   }
 
-  async loadById(id: number): Promise<Product> {
+  async findById(id: number): Promise<Product> {
     await this.productRepository.findOneOrFail({
       where: { id: id },
     });

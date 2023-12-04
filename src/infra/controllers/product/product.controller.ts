@@ -51,7 +51,7 @@ export class ProductController {
 
   @Get('product/:id')
   async loadProductById(@Param('id') id: number) {
-    return await this.loadProductByIdUsecaseProxy.getInstance().loadById(id);
+    return await this.loadProductByIdUsecaseProxy.getInstance().findById(id);
   }
 
   @Patch('product')

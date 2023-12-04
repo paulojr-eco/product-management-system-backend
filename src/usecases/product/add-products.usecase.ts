@@ -23,7 +23,6 @@ export class AddProductsUseCase implements IAddProduct {
         await this.storeRepository.findById(productStore.idLoja);
       });
     }
-
     const insertedProduct = await this.productRepository.insert(product);
     if (productsStore) {
       productsStore.forEach(async (productStore) => {

@@ -6,6 +6,6 @@ export interface ProductRepository {
   insert(product: AddProductParams): Promise<Product>;
   findAll(): Promise<Product[]>;
   delete(id: number): Promise<void>;
-  loadById(id: number): Promise<Product>;
+  findById(id: number): Promise<Product>;
   update(product: ProductModel): Promise<void>;
 }
