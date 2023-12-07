@@ -18,7 +18,7 @@ export class AllExceptionFilter implements ExceptionFilter {
     const status =
       exception instanceof HttpException
         ? exception.getStatus()
-        : HttpStatus.BAD_REQUEST;
+        : HttpStatus.INTERNAL_SERVER_ERROR;
     const message = exception.message;
 
     const responseData = {

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from '../../../infra/entities/product.entity';
@@ -27,16 +27,28 @@ export class DbProductRepository implements ProductRepository {
   }
 
   async delete(id: number): Promise<void> {
-    await this.productRepository.findOneOrFail({
+    const product = await this.productRepository.findOne({
       where: { id: id },
     });
+    if (!product) {
+      throw new HttpException(
+        'O id do produto informado não existe',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     await this.productRepository.delete(id);
   }
 
   async findById(id: number): Promise<Product> {
-    await this.productRepository.findOneOrFail({
+    const product = await this.productRepository.findOne({
       where: { id: id },
     });
+    if (!product) {
+      throw new HttpException(
+        'O id do produto informado não existe',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     return await this.productRepository
       .createQueryBuilder('produto')
       .leftJoinAndSelect('produto.produtoLojas', 'produtoLoja')
@@ -45,9 +57,15 @@ export class DbProductRepository implements ProductRepository {
   }
 
   async update(product: ProductModel): Promise<void> {
-    await this.productRepository.findOneOrFail({
+    const findedProduct = await this.productRepository.findOne({
       where: { id: product.id },
     });
+    if (!findedProduct) {
+      throw new HttpException(
+        'O id do produto informado não existe',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
     await this.productRepository.update(product.id, product);
   }
 }

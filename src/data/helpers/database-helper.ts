@@ -15,3 +15,9 @@ export const appDataSource = new DataSource({
   entities: [__dirname + './../../infra/**/*.entity.{js,ts}'],
   synchronize: true,
 });
+
+export const clearDatabase = async (): Promise<void> => {
+  await appDataSource.query('DELETE FROM produtoloja');
+  await appDataSource.query('DELETE FROM produto');
+  await appDataSource.query('DELETE FROM loja');
+};

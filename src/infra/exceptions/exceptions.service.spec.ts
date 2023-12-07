@@ -18,7 +18,7 @@ describe('ExceptionsService', () => {
     service = module.get<ExceptionsService>(ExceptionsService);
   });
 
-  it('should throw a badRequestException with correct values', () => {
+  test('should throw a badRequestException with correct values', () => {
     const errorData = mockErrorData(400);
     expect(() => service.badRequestException(errorData)).toThrow();
     try {
@@ -28,7 +28,7 @@ describe('ExceptionsService', () => {
     }
   });
 
-  it('should throw a internalServerErrorException with correct values', () => {
+  test('should throw a internalServerErrorException with correct values', () => {
     const errorData = mockErrorData(500);
     expect(() => service.internalServerErrorException(errorData)).toThrow();
     try {
@@ -38,7 +38,7 @@ describe('ExceptionsService', () => {
     }
   });
 
-  it('should throw a forbiddenException with correct values', () => {
+  test('should throw a forbiddenException with correct values', () => {
     const errorData = mockErrorData(403);
     expect(() => service.forbiddenException(errorData)).toThrow();
     try {
@@ -48,7 +48,7 @@ describe('ExceptionsService', () => {
     }
   });
 
-  it('should throw a unAuthorizedException with correct values', () => {
+  test('should throw a unAuthorizedException with correct values', () => {
     const errorData = mockErrorData(401);
     expect(() => service.unAuthorizedException(errorData)).toThrow();
     try {

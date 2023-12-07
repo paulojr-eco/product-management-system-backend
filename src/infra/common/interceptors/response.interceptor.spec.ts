@@ -37,7 +37,7 @@ describe('ResponseInterceptor', () => {
     await app.close();
   });
 
-  it('should intercept and format the response', async () => {
+  test('should intercept and format the response', async () => {
     const response = await request(app.getHttpServer()).get('/test');
     const responseBody: ResponseFormat<MockData> = response.body;
     expect(response.status).toBe(200);

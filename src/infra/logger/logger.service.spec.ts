@@ -24,21 +24,21 @@ describe('LoggerService', () => {
     service = module.get<LoggerService>(LoggerService);
   });
 
-  it('should call debug with correct values', () => {
+  test('should call debug with correct values', () => {
     const { context, message } = mockError();
     const debugSpy = jest.spyOn(service, 'debug');
     service.debug(context, message);
     expect(debugSpy).toHaveBeenCalledWith(context, message);
   });
 
-  it('should call log with correct values', () => {
+  test('should call log with correct values', () => {
     const { context, message } = mockError();
     const logSpy = jest.spyOn(service, 'log');
     service.log(context, message);
     expect(logSpy).toHaveBeenCalledWith(context, message);
   });
 
-  it('should call error with correct values', () => {
+  test('should call error with correct values', () => {
     const { context, message, trace } = mockError();
     const errorSpy = jest.spyOn(service, 'error');
     service.error(context, message, trace);

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductController } from './product.controller';
-import { mockAddProductParams } from '../../../data/mocks/product.mocks';
+import { mockAddOrUpdateProductParams } from '../../../mocks/product.mock';
 import { TypeOrmConfigModule } from '../../../main/config/typeorm-config/typeorm-config.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from '../../../infra/entities/product.entity';
@@ -35,7 +35,7 @@ describe('ProductController', () => {
     await appDataSource.destroy();
   });
 
-  it('should throw if getAllProductsUsecaseProxy throws', async () => {
+  test('should throw if getAllProductsUsecaseProxy throws', async () => {
     jest.spyOn(controller, 'getProducts').mockImplementationOnce(async () => {
       throw new Error();
     });
@@ -43,12 +43,13 @@ describe('ProductController', () => {
     await expect(promise).rejects.toThrow();
   });
 
-  it('should load products with correct value', async () => {
-    const product = await repository.insert(mockAddProductParams());
+  test('should load products with correct value', async () => {
+    const { descricao, custo, imagem } = mockAddOrUpdateProductParams();
+    const product = await repository.insert({ descricao, custo, imagem });
     const products = await controller.getProducts();
     expect(products).toContainEqual({
       id: product.id,
-      ...mockAddProductParams(),
+      ...{ descricao, custo, imagem, produtoLojas: [] },
     });
   });
 });

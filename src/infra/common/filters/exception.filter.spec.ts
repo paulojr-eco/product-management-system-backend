@@ -40,7 +40,7 @@ describe('AllExceptionFilter', () => {
     jest.clearAllMocks();
   });
 
-  it('should catch and handle generic exception', () => {
+  test('should catch and handle generic exception', () => {
     const exception = mockGenericException();
     const host = mockHost();
     const errorSpy = jest.spyOn(loggerService, 'error');
@@ -48,12 +48,12 @@ describe('AllExceptionFilter', () => {
     filter.catch(exception, host);
     expect(errorSpy).toHaveBeenCalledWith(
       `End Request for ${request.path}`,
-      `method=${request.method} status=500 message=any message`,
+      `method=${request.method} status=${HttpStatus.INTERNAL_SERVER_ERROR} message=any message`,
       exception.stack,
     );
   });
 
-  it('should catch and handle http exception', () => {
+  test('should catch and handle http exception', () => {
     const exception = mockHttpException();
     const host = mockHost();
     const warnSpy = jest.spyOn(loggerService, 'warn');
