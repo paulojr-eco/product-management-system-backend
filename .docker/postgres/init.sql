@@ -1,0 +1,18 @@
+CREATE TABLE produto (
+id SERIAL PRIMARY KEY NOT NULL,
+descricao VARCHAR(60) NOT NULL,
+custo NUMERIC(13,3),
+imagem BYTEA
+);
+
+CREATE TABLE loja (
+id SERIAL PRIMARY KEY NOT NULL,
+descricao VARCHAR(60) NOT NULL
+);
+
+CREATE TABLE produtoloja (
+id SERIAL PRIMARY KEY NOT NULL,
+idProduto INTEGER REFERENCES produto(id) NOT NULL,
+idLoja INTEGER REFERENCES loja(id) NOT NULL,
+precoVenda NUMERIC(13,3)
+);
