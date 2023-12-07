@@ -1,73 +1,53 @@
+# Product Management System Backend
+
+<div align="center">
+  <img width="150px" src="https://img.freepik.com/vetores-gratis/manipulacao-e-processamento-de-pedidos-de-ilustracao-em-vetor-conceito-abstrato-documentacao-de-pedido-sistema-de-processamento-tratamento-de-solicitacao-de-cliente-logistica-metafora-abstrata-de-operacoes-logisticas-automatizadas_335657-1789.jpg">
+</div>
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="#star-features">Features</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="#keyboard-tecnologias">Tecnologias</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="#computer_mouse-instalação">Instalação</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="#round_pushpin-rotas">Rotas</a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# :star: Features
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Essa API compõe uma série de serviços voltados para um sistema de gerenciamento de produtos.
+Com ela é possível realizar a visualização e gerenciamento de produtos, bem como cada uma das informações vinculadas eles, como imagem, custo de produção e preço de venda.
 
-## Description
+Algumas funcionalidades da aplicação são:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- Manipulação de informações dos produtos que compõem o estoque;
+- Manipulação de informações de preço de venda relacionado às lojas que vendem esses produtos.
 
-## Installation
+# :keyboard: Tecnologias
 
-```bash
-$ pnpm install
-```
+As tecnologias utilizadas no projeto foram:
 
-## Running the app
+- <img align="left" alt="NodeJs" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" /> NodeJs
+- <img align="left" alt="TypeScript" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-plain.svg" /> TypeScript
+- <img align="left" alt="NestJs" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg" /> NestJs
+
+- <img align="left" alt="TypeORM" width="30px" style="padding-right:10px;" src="https://seeklogo.com/images/T/typeorm-logo-F243B34DEE-seeklogo.com.png" /> TypeORM
+
+Além disso, foram acoplados ao projeto os conceitos de Clean Architecture e SOLID como metodologia de guia de trabalho. Dessa forma a interface da API foi construída com base nos devidos Design Patterns para que tivesse uma arquitetura desacoplada e bem definida.
+
+# :computer_mouse: Instalação
+
+Primeiramente é preciso ter o node instalado em sua máquina em sua versão LTS, bem como o Docker. A partir disso, basta executar os passos para executar a API na porta 3000:
 
 ```bash
-# development
-$ pnpm run start
+# Clonar o repositório
+git clone https://github.com/paulojr-eco/product-management-system-backend.git
 
-# watch mode
-$ pnpm run start:dev
+# Acessar o diretório
+cd product-management-system-backend
 
-# production mode
-$ pnpm run start:prod
+# Subir os containers de banco de dados, pgAdmin e da aplicação em si
+docker-compose up -d
 ```
 
-## Test
+# :round_pushpin: Rotas
 
-```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Para facilitar o acesso as rotas acesse a <a href="https://www.postman.com/interstellar-sunset-591957/workspace/product-system-management/collection/16394034-0b4c6545-82e1-4e2f-ae02-35c5d3e5175d?action=share&creator=16394034" target="_blank"> workspace </a> criada pelo Postman
