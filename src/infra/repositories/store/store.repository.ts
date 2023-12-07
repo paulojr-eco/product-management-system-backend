@@ -16,4 +16,8 @@ export class DbStoreRepository implements StoreRepository {
       where: { id: id },
     });
   }
+
+  async findAll(): Promise<Store[]> {
+    return await this.storeEntityRepository.find();
+  }
 }

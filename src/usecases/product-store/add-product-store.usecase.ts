@@ -5,6 +5,7 @@ import {
   AddProductStoreInProductCreatedParams,
   IAddProductStore,
 } from '../../domain/usecases/product-store/add-product-store';
+import { ProductStore } from 'src/infra/entities/product-store.entity';
 
 export class AddProductStoreUseCase implements IAddProductStore {
   constructor(
@@ -15,11 +16,15 @@ export class AddProductStoreUseCase implements IAddProductStore {
 
   async add(
     productStore: AddProductStoreInProductCreatedParams,
-  ): Promise<void> {
+  ): Promise<ProductStore> {
     const store = await this.storeRepository.findById(productStore.idLoja);
     const product = await this.productRepository.findById(
       productStore.idProduto,
     );
-    await this.productStoreRepository.insert(productStore, store, product);
+    return await this.productStoreRepository.insert(
+      productStore,
+      store,
+      product,
+    );
   }
 }

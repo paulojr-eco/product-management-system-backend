@@ -14,8 +14,8 @@ import { LoadProductsUseCase } from '../../../usecases/product/load-products.use
 import { AddProductDto, UpdateProductDto } from './product.dto';
 import { AddProductsUseCase } from '../../../usecases/product/add-products.usecase';
 import { DeleteProductUseCase } from '../../../usecases/product/delete-product.usecase';
-import { LoadProductByIdUseCase } from 'src/usecases/product/load-product-by-id.usecase';
-import { UpdateProductUseCase } from 'src/usecases/product/update-products.usecase';
+import { LoadProductByIdUseCase } from '../../../usecases/product/load-product-by-id.usecase';
+import { UpdateProductUseCase } from '../../../usecases/product/update-products.usecase';
 
 @Controller()
 export class ProductController {

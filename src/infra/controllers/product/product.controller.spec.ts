@@ -46,7 +46,6 @@ describe('ProductController', () => {
   it('should load products with correct value', async () => {
     const product = await repository.insert(mockAddProductParams());
     const products = await controller.getProducts();
-    console.log(products);
     expect(products).toContainEqual({
       id: product.id,
       ...mockAddProductParams(),
