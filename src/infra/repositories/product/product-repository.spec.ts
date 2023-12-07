@@ -34,7 +34,7 @@ describe('DbProductRepository', () => {
   });
 
   describe('insert()', () => {
-    test('Should add a new product', async () => {
+    test('should add a new product', async () => {
       const { descricao, custo, imagem } = mockAddOrUpdateProductParams();
       const insertSpy = jest.spyOn(repository, 'insert');
       const product = await repository.insert({ descricao, custo, imagem });
@@ -47,12 +47,12 @@ describe('DbProductRepository', () => {
   });
 
   describe('findAll()', () => {
-    test('Should return an empty list if there are no products', async () => {
+    test('should return an empty list if there are no products', async () => {
       const products = await repository.findAll();
       expect(products).toEqual([]);
     });
 
-    test('Should contain the product inserted in the products list', async () => {
+    test('should contain the product inserted in the products list', async () => {
       const { descricao, custo, imagem } = mockAddOrUpdateProductParams();
       const product = await repository.insert({ descricao, custo, imagem });
       const products = await repository.findAll();
@@ -64,7 +64,7 @@ describe('DbProductRepository', () => {
   });
 
   describe('delete()', () => {
-    test('Should throw if the product does not exist', async () => {
+    test('should throw if the product does not exist', async () => {
       const id = 99999;
       const httpException = mockHttpException(
         'O id do produto informado não existe',
@@ -73,7 +73,7 @@ describe('DbProductRepository', () => {
       await expect(repository.delete(id)).rejects.toThrow(httpException);
     });
 
-    test('Should remove the product', async () => {
+    test('should remove the product', async () => {
       const { descricao, custo, imagem } = mockAddOrUpdateProductParams();
       const product = await repository.insert({ descricao, custo, imagem });
       const deleteSpy = jest.spyOn(repository, 'delete');
@@ -88,7 +88,7 @@ describe('DbProductRepository', () => {
   });
 
   describe('findById()', () => {
-    test('Should throw if the product does not exist', async () => {
+    test('should throw if the product does not exist', async () => {
       const id = 99999;
       const httpException = mockHttpException(
         'O id do produto informado não existe',
@@ -97,7 +97,7 @@ describe('DbProductRepository', () => {
       await expect(repository.findById(id)).rejects.toThrow(httpException);
     });
 
-    test('Should find the correct product', async () => {
+    test('should find the correct product', async () => {
       const { descricao, custo, imagem } = mockAddOrUpdateProductParams();
       const product = await repository.insert({ descricao, custo, imagem });
       const findByIdSpy = jest.spyOn(repository, 'findById');
@@ -111,7 +111,7 @@ describe('DbProductRepository', () => {
   });
 
   describe('update()', () => {
-    test('Should throw if the product does not exist', async () => {
+    test('should throw if the product does not exist', async () => {
       const newProductInfo = {
         id: 99999,
         ...mockAddOrUpdateProductParams(),
@@ -125,7 +125,7 @@ describe('DbProductRepository', () => {
       );
     });
 
-    test('Should update the product', async () => {
+    test('should update the product', async () => {
       const { descricao, custo, imagem } = mockAddOrUpdateProductParams();
       const product = await repository.insert({ descricao, custo, imagem });
       const newProductInfo = {
