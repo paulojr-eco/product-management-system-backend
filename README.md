@@ -52,6 +52,10 @@ cd product-management-system-backend
 docker-compose up -d
 ```
 
+Após isso, acesse o pgAdmin através da rota <a href="http:localhost:9000">http:localhost:9000</a>, informe as credenciais => login: `admin@user.com` senha: `123456` e crie um novo server com base nas informações: host name: `db` username: `postgres` password: `root` e acesse o banco `product-management-system`. Nisso verifique se as tabelas `produto`, `loja` e `produtoloja` não estão criadas. Caso não estejam, execute o script SQL presente em `.docker/postgres/init.sql` para criá-las.
+
+Pronto! O ambiente foi configurado com sucesso.
+
 # :round_pushpin: Rotas
 
 Para facilitar o acesso as rotas acesse a <a href="https://www.postman.com/interstellar-sunset-591957/workspace/product-system-management/collection/16394034-0b4c6545-82e1-4e2f-ae02-35c5d3e5175d?action=share&creator=16394034" target="_blank"> workspace </a> criada pelo Postman
