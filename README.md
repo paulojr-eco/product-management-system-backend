@@ -35,7 +35,11 @@ Além disso, foram acoplados ao projeto os conceitos de Clean Architecture e SOL
 
 # :computer_mouse: Instalação
 
-Primeiramente é preciso ter o node instalado em sua máquina em sua versão LTS, bem como o Docker. A partir disso, basta executar os passos para executar a API na porta 3000:
+Primeiramente é preciso ter o node instalado em sua máquina em sua versão LTS, bem como o Docker. 
+
+Em seguida, não se esqueça de criar o arquivo .env com base no arquivo .env.example (caso o arquivo .env seja idêntico ao exemplo, a aplicação já deve funcionar normalmente). 
+
+A partir disso, basta executar os passos para executar a API na porta 3000:
 
 ```bash
 # Clonar o repositório
