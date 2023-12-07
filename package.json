@@ -19,7 +19,8 @@
     "test:cov": "NODE_ENV=test jest --coverage --runInBand",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "NODE_ENV=test jest --config ./test/jest-e2e.json",
-    "husky:install": "husky install"
+    "husky:install": "husky install",
+    "console": "ts-node -r tsconfig-paths/register src/console.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -32,6 +33,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "cors": "^2.8.5",
+    "nestjs-console": "^9.0.0",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",

@@ -48,7 +48,7 @@ services:
     image: node:20
     working_dir: /usr/src/product-system-management-backend/
     restart: always
-    command: bash -c "npm install -g @nestjs/cli@10.0.0 && npm install -g pnpm && pnpm install && pnpm start:dev"
+    command: bash -c "npm install -g @nestjs/cli@10.0.0 && npm install -g pnpm && pnpm install && pnpm console fixtures && pnpm start:dev"
     volumes:
       - ./:/usr/src/product-system-management-backend/
     ports:
