@@ -4,10 +4,10 @@ import { Repository } from 'typeorm';
 import { Product } from '../../../infra/entities/product.entity';
 import { ProductStore } from '../../../infra/entities/product-store.entity';
 import { ProductStoreRepository } from '../../../main/repositories/product-store-repository.interface';
-import { AddProductStoreParams } from 'src/domain/usecases/product/add-product';
-import { Store } from 'src/infra/entities/store.entity';
+import { AddProductStoreParams } from '../../../domain/usecases/product/add-product';
+import { Store } from '../../../infra/entities/store.entity';
 import { toProductStoreEntity } from './product-store.transformer';
-import { ProductStore as ProductStoreModel } from 'src/domain/models/product-store';
+import { ProductStore as ProductStoreModel } from '../../../domain/models/product-store';
 
 @Injectable()
 export class DbProductStoreRepository implements ProductStoreRepository {
